@@ -25,7 +25,7 @@ struct AEOTPViewRepresentable: UIViewRepresentable {
     private let isSecureTextEntry: Bool
     private let onCommit: (() -> Void)?
     private let textField: AEOTPTextFieldSwiftUI
-        
+    
     init(
         text: Binding<String>,
         slotsCount: Int = 6,
@@ -121,7 +121,12 @@ struct AEOTPViewRepresentable: UIViewRepresentable {
         }
         
         func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-            guard let characterCount = textField.text?.count else { return false }
+            guard let characterCount = textField.text?.count,CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: string)) else { return false }
+//
+//            let allowedCharacters = CharacterSet.decimalDigits
+//            let characterSet = CharacterSet(charactersIn: string)
+//            return CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: string))
+            
             return characterCount < slotsCount || string.isEmpty
         }
     }

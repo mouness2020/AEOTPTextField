@@ -72,6 +72,7 @@ public class AEOTPTextField: UITextField {
             currentLabel.text = otpDefaultCharacter
             currentLabel.layer.borderWidth = otpDefaultBorderWidth
             currentLabel.layer.borderColor = otpDefaultBorderColor.cgColor
+            currentLabel.textColor = otpDefaultBorderColor
             currentLabel.backgroundColor = otpBackgroundColor
         }
     }
@@ -137,7 +138,10 @@ private extension AEOTPTextField {
     
     @objc
     func textDidChange() {
-        guard let text = self.text, text.count <= digitLabels.count else { return }
+        guard let text = self.text, text.count <= digitLabels.count else {
+            clearOTP()
+            return
+        }
         for labelIndex in 0 ..< digitLabels.count {
             let currentLabel = digitLabels[labelIndex]
             if labelIndex < text.count {
