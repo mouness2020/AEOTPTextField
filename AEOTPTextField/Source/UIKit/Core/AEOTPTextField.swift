@@ -92,12 +92,15 @@ private extension AEOTPTextField {
     func configureTextField() {
         tintColor = .clear
         textColor = .clear
-        keyboardType = .numberPad
+        textAlignment = .natural
+        keyboardType = .asciiCapableNumberPad
         textContentType = .oneTimeCode
         borderStyle = .none
         addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         delegate = implementation
         implementation.implementationDelegate = self
+        becomeFirstResponder()
+
     }
     
     func createLabelsStackView(with count: Int) -> UIStackView {
@@ -121,12 +124,14 @@ private extension AEOTPTextField {
         label.layer.cornerRadius = otpCornerRaduis
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.textColor = otpTextColor
+        label.textColor = otpDefaultBorderColor
         label.font = label.font.withSize(otpFontSize)
         label.font = otpFont
         label.isUserInteractionEnabled = true
         label.layer.masksToBounds = true
         label.text = otpDefaultCharacter
+        label.layer.borderWidth = otpDefaultBorderWidth
+        label.layer.borderColor = otpDefaultBorderColor.cgColor
         return label
     }
     
@@ -138,11 +143,13 @@ private extension AEOTPTextField {
             if labelIndex < text.count {
                 let index = text.index(text.startIndex, offsetBy: labelIndex)
                 currentLabel.text = isSecureTextEntry ? "✱" : String(text[index])
+                currentLabel.textColor = otpTextColor
                 currentLabel.layer.borderWidth = otpFilledBorderWidth
                 currentLabel.layer.borderColor = otpFilledBorderColor.cgColor
                 currentLabel.backgroundColor = otpFilledBackgroundColor
             } else {
                 currentLabel.text = otpDefaultCharacter
+                currentLabel.textColor = otpDefaultBorderColor
                 currentLabel.layer.borderWidth = otpDefaultBorderWidth
                 currentLabel.layer.borderColor = otpDefaultBorderColor.cgColor
                 currentLabel.backgroundColor = otpBackgroundColor
