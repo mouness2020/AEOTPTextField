@@ -22,6 +22,7 @@ class AEOTPTextFieldSwiftUI: AEOTPTextField {
         otpTextColor: UIColor,
         otpFontSize: CGFloat,
         otpFont: UIFont,
+        currentLang:String,
         isSecureTextEntry: Bool
     ) {
         super.init(frame: .init(origin: .zero, size: .init(width: UIScreen.main.bounds.width * 0.8, height: 40)))
@@ -38,6 +39,7 @@ class AEOTPTextFieldSwiftUI: AEOTPTextField {
         self.otpFontSize = otpFontSize
         self.otpFont = otpFont
         self.isSecureTextEntry = isSecureTextEntry
+        self.currentLang = currentLang
         
         configure(with: slotsCount)
     }

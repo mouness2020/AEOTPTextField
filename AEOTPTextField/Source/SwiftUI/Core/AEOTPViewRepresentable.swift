@@ -25,6 +25,7 @@ struct AEOTPViewRepresentable: UIViewRepresentable {
     private let isSecureTextEntry: Bool
     private let onCommit: (() -> Void)?
     private let textField: AEOTPTextFieldSwiftUI
+    private let currentLang:String
     
     init(
         text: Binding<String>,
@@ -41,6 +42,7 @@ struct AEOTPViewRepresentable: UIViewRepresentable {
         otpFontSize: CGFloat = 14,
         otpFont: UIFont = UIFont.systemFont(ofSize: 14),
         isSecureTextEntry: Bool = false,
+        currentLang:String = "ar",
         onCommit: (() -> Void)? = nil
     ) {
         self._text = text
@@ -58,6 +60,7 @@ struct AEOTPViewRepresentable: UIViewRepresentable {
         self.otpFont = otpFont
         self.isSecureTextEntry = isSecureTextEntry
         self.onCommit = onCommit
+        self.currentLang = currentLang
         
         self.textField = AEOTPTextFieldSwiftUI(
             slotsCount: slotsCount,
@@ -72,6 +75,7 @@ struct AEOTPViewRepresentable: UIViewRepresentable {
             otpTextColor: otpTextColor,
             otpFontSize: otpFontSize,
             otpFont: otpFont,
+            currentLang: currentLang,
             isSecureTextEntry: isSecureTextEntry
         )
     }

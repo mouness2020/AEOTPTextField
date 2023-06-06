@@ -33,6 +33,9 @@ public class AEOTPTextField: UITextField {
     public var otpFontSize: CGFloat = 14
     /// The default font of the text
     public var otpFont: UIFont = UIFont.systemFont(ofSize: 14)
+    
+    public var currentLang:String = "ar"
+
     /// The delegate of the AEOTPTextFieldDelegate protocol
     public weak var otpDelegate: AEOTPTextFieldDelegate?
 
@@ -91,6 +94,7 @@ public class AEOTPTextField: UITextField {
 //
 private extension AEOTPTextField {
     func configureTextField() {
+        textAlignment = .left
         tintColor = .clear
         textColor = .clear
         textAlignment = .natural
@@ -143,7 +147,8 @@ private extension AEOTPTextField {
             return
         }
         for labelIndex in 0 ..< digitLabels.count {
-            let currentLabel = digitLabels[labelIndex]
+            
+            let currentLabel = digitLabels[currentLang == "en" ? labelIndex : ((digitLabels.count - 1) - labelIndex)]
             if labelIndex < text.count {
                 let index = text.index(text.startIndex, offsetBy: labelIndex)
                 currentLabel.text = isSecureTextEntry ? "✱" : String(text[index])

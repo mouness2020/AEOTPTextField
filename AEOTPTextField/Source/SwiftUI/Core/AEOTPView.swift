@@ -48,8 +48,13 @@ public struct AEOTPView: View {
     private let isSecureTextEntry: Bool
     /// A Boolean value that used to allow the `AEOTPView` clear the OTP and set the `AEOTPView` to the default state when you set the OTP Text with Empty Value
     private let enableClearOTP: Bool
+    
+    private var currentLang:String = "ar"
+
     /// A Closure that fires when the OTP returned
     private var onCommit: (() -> Void)?
+    
+
     
     // MARK: - INIT
     //
@@ -91,6 +96,7 @@ public struct AEOTPView: View {
         otpFont: UIFont = UIFont.systemFont(ofSize: 14),
         isSecureTextEntry: Bool = false,
         enableClearOTP: Bool = false,
+        currentLang:String = "ar",
         onCommit: (() -> Void)? = nil
     ) {
         self._text = text
@@ -111,6 +117,7 @@ public struct AEOTPView: View {
         self.isSecureTextEntry = isSecureTextEntry
         self.enableClearOTP = enableClearOTP
         self.onCommit = onCommit
+        self.currentLang = currentLang
     }
     
     // MARK: - BODY
@@ -150,6 +157,7 @@ public struct AEOTPView: View {
             otpFontSize: otpFontSize,
             otpFont: otpFont,
             isSecureTextEntry: isSecureTextEntry,
+            currentLang: currentLang,
             onCommit: onCommit
         )
     } //: otpView
